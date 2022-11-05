@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
-
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const navigation = [
   { name: 'Pricing', href: '#' },
@@ -32,16 +32,8 @@ const Landing = () => {
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </Popover.Button>
             </div>
-            <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-              <a href="/" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-                Sign in
-              </a>
-              <a
-                href="/"
-                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-              >
-                Sign up
-              </a>
+            <div tw="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+              <ConnectButton />
             </div>
           </div>
 
@@ -88,19 +80,8 @@ const Landing = () => {
                       </a>
                     ))}
                   </div>
-                  <div className="mt-6">
-                    <a
-                      href="/"
-                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                    >
-                      Sign up
-                    </a>
-                    <p className="mt-6 text-center text-base font-medium text-gray-500">
-                      Existing customer?
-                      <a href="/" className="text-gray-900">
-                        Sign in
-                      </a>
-                    </p>
+                  <div tw="mt-6">
+                    <ConnectButton />
                   </div>
                 </div>
               </div>
