@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
 
-const Signin = ({onCloseModal}) => {
+const Signin = ({onCloseModal}: any) => {
 
     const [loading, setLoading] = useState(false);
     const {address} = useAccount()

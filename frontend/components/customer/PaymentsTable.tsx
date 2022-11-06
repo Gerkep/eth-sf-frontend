@@ -48,7 +48,7 @@ const PaymentsTable = () => {
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
                 {people.map((person) => (
-                <tr key={person.email}>
+                <tr key={person.date + person.value}>
                     <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
                     {person.merchant}
                     <dl className="font-normal lg:hidden">

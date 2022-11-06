@@ -1,18 +1,29 @@
 import React from 'react';
 import { useState } from 'react';
+import { Client } from '@xmtp/xmtp-js'
+import { useSigner } from 'wagmi';
+import { Wallet } from 'ethers'
 
-const Signin = ({onCloseModal}) => {
+const Signin = ({onCloseModal}: any) => {
 
-    const [ens, setENS] = useState();
+    const wallet = Wallet.createRandom();
+    const [ens, setENS] = useState('');
     const [loading, setLoading] = useState(false);
-    
     const handleCloseClick = () => {
         onCloseModal();
     };
 
-    const signin = async (e) => {
+    const share = async (e: React.FormEvent<HTMLFormElement>) => {
+      console.log("share")
         setLoading(true);
         e.preventDefault();
+        const xmtp = await Client.create(wallet)
+        const newConversation = await xmtp.conversations.newConversation(
+          '0x3F11b27F323b62B159D2642964fa27C46C841897'
+        )
+        console.log(`Saying GM to ${newConversation.peerAddress}`)
+        await newConversation.send('gm')
+      
         handleCloseClick();
         setLoading(false);
     }
@@ -26,7 +37,7 @@ const Signin = ({onCloseModal}) => {
           <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">Share the bill</h2>
         </div>
         </div>
-            <form className="space-y-6 mt-10" onSubmit={(e) => signin(e)} method="POST">
+            <form className="space-y-6 mt-10" onSubmit={(e) => share(e)} method="POST">
                 <div>
                 <div className="flex items-center justify-between">
                 <div className="flex items-center">
@@ -45,7 +56,7 @@ const Signin = ({onCloseModal}) => {
                     value={ens}
                     autoComplete="ens"
                     placeholder='gerke.eth'
-                    required
+                    // required
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     />
                 </div>

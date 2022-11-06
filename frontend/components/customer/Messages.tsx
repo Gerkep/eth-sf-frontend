@@ -1,33 +1,33 @@
 import { useState } from "react";
 import Chat from "./Chat";
-
-const people = [
-    {
-      name: 'Leslie Alexander',
-      email: 'leslie.alexander@example.com',
-      message: 'Ayo, hyd?',
-      address: '0x0',
-      imageUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-        name: 'Jamal Abdul',
-        email: 'abdul1997@example.com',
-        message: 'Bearish af',
-        address: '0x03',
-        imageUrl:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    // More people...
-  ]
-  
+import { Client, Conversation } from '@xmtp/xmtp-js'
+import { useEffect } from "react";
+import { useSigner } from "wagmi";
+import { Wallet } from 'ethers'
 
 const Messages = () => {
 
+  const wallet = Wallet.createRandom();
   const [openChat, setOpenChat] = useState(false);
   const [recipientAddress, setRecipientAddress] = useState('');
+  const [conversations, setConversations] = useState<Conversation[]>();
 
-  const openChatPage = (address) => {
+  useEffect(() => {
+    const getConversations = async () => {
+        const xmtp = await Client.create(wallet);
+        const allConversations = await xmtp.conversations.list();
+        setConversations(allConversations);
+        console.log(allConversations)
+    }
+
+    let chatbox = document.querySelector('.chatbox');
+    if(chatbox)
+    chatbox.scrollTop = chatbox.scrollHeight;
+
+    getConversations();
+}, [])
+
+  const openChatPage = (address: any) => {
     setOpenChat(true);
     setRecipientAddress(address);
   }
@@ -38,7 +38,7 @@ const Messages = () => {
       <Chat recipientAddres={recipientAddress}/>
       :
       <div className="grid grid-cols-1 mt-10 gap-4 sm:grid-cols-2">
-        {people.map((person) => (
+        {/* {conversations.map((person) => (
           <div
             key={person.address}
             onClick={() => openChatPage(person.address)}
@@ -55,7 +55,7 @@ const Messages = () => {
               </a>
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
       }
       </>

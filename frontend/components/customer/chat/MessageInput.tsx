@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 export default function MessageInput() {
 
-    const [file, setFile] = useState();
+    const [file, setFile] = useState('');
 
   return (
     <div className="flex items-start space-x-4">
