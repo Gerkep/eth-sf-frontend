@@ -1,21 +1,62 @@
 import Share from "./popups/Share";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReviewForm from "./popups/ReviewForm";
 import ReviewSuccess from "./popups/ReviewSuccess";
+import { useAccount, useConnect } from "wagmi";
+import { getReceiptsStoreServer, getReceiptsUserServer } from "../../utils";
 
-const date = new Date().toLocaleDateString();
+const today = new Date().toLocaleDateString();
 
-const merchants = [
-    { merchant: 'Apple Inc.', date: date.toString(), value: '999', currency: 'USDC', link: "https://www.receipt.com" },
-    { merchant: 'Apple Inc.', date: date.toString(), value: '249', currency: 'USDC', link: "https://www.receipt2.com" }
+const merchantsSample = [
+    { merchant: 'Apple Inc.', date: today.toString(), value: '999', currency: 'USDC', link: "https://www.receipt.com" },
+    { merchant: 'Apple Inc.', date: today.toString(), value: '249', currency: 'USDC', link: "https://www.receipt2.com" }
 ]
 
 const PaymentsTable = ({ isCustomer }: any) => {
 
     const [openShare, setOpenShare] = useState(false);
+    const {address} = useAccount();
+    const [merchants, setMerchants] = useState(merchantsSample);
     const [linkToShare, setLinkToShare] = useState('');
     const [openReview, setOpenReview] = useState(false);
     const [openReviewSuccess, setOpenReviewSuccess] = useState(false);
+
+    useEffect(()=>{
+        if(isCustomer && address){
+            getReceiptsUserServer(address).then((data:any)=>{
+                let parsedData = data.map((item : any )=>{
+
+                    let parsedDetail = item.detail.split("_");
+                    return {
+                        merchant : parsedDetail[0] || "None",
+                        date : item.date || today,
+                        value : parsedDetail[1] || "NaN",
+                        currency : parsedDetail[2] || "NaN",
+                        link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
+                    }
+                })
+                setMerchants(parsedData)
+            })
+        }
+    },[address ,isCustomer])
+
+    useEffect(()=>{
+        if(!isCustomer){
+            getReceiptsStoreServer("store1",0).then((data:any)=>{
+                let parsedData = data.map((item : any )=>{
+                    let parsedDetail = item.detail.split("_");
+                    return {
+                        merchant : parsedDetail[0] || "None",
+                        date : item.date || today,
+                        value : parsedDetail[1] || "NaN",
+                        currency : parsedDetail[2] || "NaN",
+                        link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
+                    }
+                })
+                setMerchants(parsedData)
+            })
+        }
+    },[])
 
     return (
         <div>
@@ -27,7 +68,7 @@ const PaymentsTable = ({ isCustomer }: any) => {
                     <thead className="bg-gray-50">
                         <tr>
                             <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                Merchant
+                                Detail
                             </th>
                             <th
                                 scope="col"

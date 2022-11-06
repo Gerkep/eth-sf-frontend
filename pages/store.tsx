@@ -24,7 +24,6 @@ const StoreDashboard = () => {
     const [openSubmitTx, setOpenSubmitTx] = useState(false);
     const [openRegister, setOpenRegister] = useState(false);
     const [openRegisterQR, setOpenRegisterQR] = useState(false);
-    const [openQR, setOpenQR] = useState(false);
     const [tab, setTab] = useState("Stats");
 
     return (
@@ -32,10 +31,7 @@ const StoreDashboard = () => {
             <Header setOpenSubmitTx={setOpenSubmitTx} setOpenSignIn={setOpenSignIn} />
             {openSignIn && <SignIn onCloseModal={() => setOpenSignIn(false)} setOpenRegister={setOpenRegister} />}
             {openSubmitTx && <SubmitTx setOpenSubmitTx={setOpenSubmitTx}
-                setOpenQR={setOpenQR}
                 onCloseModal={() => setOpenSubmitTx(false)} />}
-            {openQR && <QR setOpenQR={setOpenQR} onCloseModal={() => setOpenQR(false)} />}
-            {openQR && <QR setOpenQR={setOpenQR} onCloseModal={() => setOpenQR(false)} />}
             {openRegister && <Register setOpenRegister={setOpenRegister} setOpenSignIn={setOpenSignIn} onCloseModal={() => setOpenRegister(false)} setOpenRegisterQR={setOpenRegisterQR} />}
             {openRegisterQR && <RegisterQR setOpenRegisterQR={setOpenRegisterQR} onCloseModal={() => setOpenRegisterQR(false)} />}
 
