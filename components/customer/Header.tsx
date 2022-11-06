@@ -2,10 +2,21 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { verifyUser } from '../../utils';
+import { useAccount } from "wagmi";
 
 const Header = ({openSignIn}: any) => {
     const [verified, setVerified] = useState(false);
+    const {address} = useAccount();
+    const [loading, setLoading] = useState(false);
     
+    const verifyUserFunc = async () => {
+        setLoading(true);
+        await verifyUser(address);
+        setVerified(true)
+        setLoading(false);
+    }
+
     return (
         <div style={{height: "13vh"}} className="bg-indigo-600">
             <nav className="mx-auto max-w-full px-4 sm:px-6 lg:px-8" aria-label="Top">
@@ -28,8 +39,16 @@ const Header = ({openSignIn}: any) => {
                         Verified ✅
                 </button> 
                 :
+                loading ?
                 <button
-                    onClick={() => setVerified(true)}
+                    onClick={() => verifyUserFunc()}
+                    className="inline-block rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75"
+                    >
+                    <div className='spinner-white'></div>
+                </button>    
+                :
+                <button
+                    onClick={() => verifyUserFunc()}
                     className="inline-block rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75"
                     >
                         Verify

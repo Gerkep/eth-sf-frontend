@@ -6,7 +6,6 @@ const RegisterQR = ({ onCloseModal, setOpenQR, storeKey, storeId }: any) => {
   const [loading, setLoading] = useState(false);
   const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-
   useEffect(() => {
 
     const onBodyClick = (event: any) => {

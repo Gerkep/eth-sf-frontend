@@ -7,7 +7,7 @@ export default function Stores() {
     <div>
       <div className="mt-6 flow-root">
         <ul role="list" className="-my-5 divide-y divide-gray-200">
-          {people.map((person, index) => (
+          {people.map((person:any, index: any) => (
             <li key={person.handle} className="py-4">
               <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0">
