@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { registerUserInServer } from '../../../utils';
 
 const Register = ({ onCloseModal, setOpenSignIn, setOpenRegisterQR }: any) => {
 
@@ -16,10 +17,17 @@ const Register = ({ onCloseModal, setOpenSignIn, setOpenRegisterQR }: any) => {
     handleCloseClick();
     setOpenSignIn(true);
   }
-
   const register = async (e: React.FormEvent<HTMLFormElement>) => {
+
     setLoading(true);
     e.preventDefault();
+
+    const storeId = await registerUserInServer(e.target.company!.value,e.target.email!.value);
+    console.log(storeId);
+    // await registerStoreServer(e.target.email!,e.target!.company!);
+
+    console.log(process.env.SERVER_URL);
+
     handleCloseClick();
     setLoading(false);
     setOpenRegisterQR(true);

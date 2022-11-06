@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import ItemFields from './ItemFields';
 import Dropdown from './Dropdown';
+import { submitReceiptServer } from '../../../utils';
 
 const currencies = { USD: '$', EUR: '€', GBP: '£' }
 
@@ -29,11 +30,42 @@ const SubmitTx = ({ onCloseModal, setOpenSubmitTx, setOpenQR }: any) => {
   };
 
   const signin = async (e: React.FormEvent<HTMLFormElement>) => {
+
     setLoading(true);
     e.preventDefault();
-    handleCloseClick();
-    setLoading(false);
-    setOpenQR(true);
+
+    const receiptData = {
+      "items" : [
+          {
+          "detail" : "banana",
+          "qty" : 1,
+          "price": "24"
+          },
+          {
+          "detail" : "apple",
+          "qty" : 5,
+          "price": "20"
+          },
+          {
+          "detail" : "strawberry",
+          "qty" : 10,
+          "price": "100"
+          }
+      ],
+      "total" : "144"
+  }
+    let data = await submitReceiptServer(receiptData,e.target.storeKey!.value,0,"MYR", "Malaysia", null);
+    let link = `https://${data.uri}.ipfs.w3s.link/output.pdf`;
+    let detail = data.detail;
+    let hash = data.hash;
+
+    console.log(link, detail, hash);
+    //uri is the final link
+
+    // e.preventDefault();
+    // handleCloseClick();
+    // setLoading(false);
+    // setOpenQR(true);
   }
 
   return (
