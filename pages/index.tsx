@@ -159,7 +159,7 @@ const Landing = () => {
                 </Link>
                 <div className="col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
                 <Link href="https://worldcoin.org/">
-                <div className="h-14 w-36 relative mr-8 ml-8 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
+                <div className="h-14 w-full lg:w-36 relative mr-8 ml-8 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
                     <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://worldcoin.org/icons/logo.svg"}></Image>
                   </div>
                 </Link>
