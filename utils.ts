@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const serverUrl = "https://oyster-app-l5cwr.ondigitalocean.app";
+const serverUrl = "http://127.0.0.1:9002"; // https://oyster-app-l5cwr.ondigitalocean.app
 const chainId = "0x2696efe5"
 
 export const registerUserInServer = async (companyName : any, email : any) => {
@@ -105,6 +105,7 @@ export const getReceiptsUserServer = async (userAddr : any) => {
 
 export const getReceiptsStoreServer = async (storeKey : any, storeSignal : any) => {
     try {
+        console.log(storeKey,storeSignal)
         const response = await axios.post(`${serverUrl}/get-store-transactions`, {
             "storeKey" : storeKey,
             "storeSignal" : storeSignal
@@ -120,15 +121,18 @@ export const getReceiptsStoreServer = async (storeKey : any, storeSignal : any) 
         return null;
     }
 }
-export const getTxDeclarationServer = async(userAddr : any, userSignal :any) => {
+export const getTxDeclarationServer = async(userAddr : any, userSignal :any, country : any, userName : any) => {
     try {
         const response = await axios.post(`${serverUrl}/get-store-transactions`, {
             userAddr,
-            userSignal
+            userSignal,
+            country,
+            userName,
+            chainId
           });
         console.log(response);
         if(response.status == 200){
-            return response.data.transactions
+            return response.data
         }else {
             return null 
         }

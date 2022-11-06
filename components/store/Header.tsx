@@ -25,7 +25,7 @@ const Header = ({ setOpenSignIn, setOpenSubmitTx }: any) => {
 
                         <button
                             className="inline-block rounded-md border border-transparent bg-white py-2 px-4 text-base font-medium text-indigo-600 hover:bg-indigo-50"
-                            onClick={() => {localStorage.removeItem("storeKey") ; localStorage.removeItem("storeId")}}
+                            onClick={() => {localStorage.removeItem("storeKey") ; localStorage.removeItem("storeId") ;setOpenSignIn(true)}}
                         >
                             Sign out
                         </button>
