@@ -15,11 +15,17 @@ const Chat = ({ recipientAddress }: any) => {
             if(signer){
                 const xmtp = await Client.create(signer)
                 const conversation = await xmtp.conversations.newConversation(
-                    '0x3F11b27F323b62B159D2642964fa27C46C841897'
+                    recipientAddress
                 )
-                
-                const messages = await conversation.messages();
-                console.log(messages)
+
+                // All parameters are optional and can be omitted
+                const opts = {
+                    // Only show messages from last 24 hours
+                    startTime: new Date(new Date().setDate(new Date().getDate() - 1)),
+                    endTime: new Date(),
+                }                
+                const messagesInConversation = await conversation.messages(opts);
+                console.log(messagesInConversation);
             }
         }
         let chatbox = document.querySelector('.chatbox');

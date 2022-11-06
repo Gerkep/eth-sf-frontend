@@ -2,12 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { Client } from '@xmtp/xmtp-js'
 import { useSigner } from 'wagmi';
-import { Wallet, ethers } from 'ethers'
+import { ethers } from 'ethers'
 import { showNotification } from '@mantine/notifications';
 
 const Signin = ({onCloseModal}: any) => {
 
-    const wallet = Wallet.createRandom();
     const [ens, setENS] = useState('');
     const [givenAddress, setGivenAddress] = useState('');
     const {data: signer} = useSigner();
