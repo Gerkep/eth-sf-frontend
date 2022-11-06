@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const serverUrl = "http://127.0.0.1:9002";
+const serverUrl = "http://127.0.0.1:9002"; // https://oyster-app-l5cwr.ondigitalocean.app
 const chainId = "0x2696efe5"
 
 export const registerUserInServer = async (companyName : any, email : any) => {
