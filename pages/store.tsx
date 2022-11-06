@@ -7,6 +7,7 @@ import PaymentsTable from "../components/customer/PaymentsTable";
 import { RevenueChart } from "../components/store/StoreChart";
 import Register from "../components/store/popups/Register";
 import RegisterQR from "../components/store/popups/RegisterQR";
+import Loading from "../components/Loading";
 
 const tabs = [
     { name: 'Stats' },
@@ -32,6 +33,7 @@ const StoreDashboard = () => {
 
     return (
         <>
+            <Loading />
             <Header setOpenSubmitTx={setOpenSubmitTx} setOpenSignIn={setOpenSignIn} />
             {openSignIn && <SignIn onCloseModal={() => setOpenSignIn(false)} setOpenRegister={setOpenRegister} />}
             {openSubmitTx && <SubmitTx setOpenSubmitTx={setOpenSubmitTx}

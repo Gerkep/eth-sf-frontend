@@ -4,6 +4,7 @@ import ReviewForm from "./popups/ReviewForm";
 import ReviewSuccess from "./popups/ReviewSuccess";
 import { useAccount, useConnect } from "wagmi";
 import { getReceiptsStoreServer, getReceiptsUserServer } from "../../utils";
+import Loading from "../Loading";
 
 const today = new Date().toLocaleDateString();
 
@@ -13,6 +14,7 @@ const merchantsSample : any = [
 const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
 
     const [openShare, setOpenShare] = useState(false);
+    const [loading, setLoading] = useState(true);
     const {address} = useAccount();
     const [merchants, setMerchants] = useState(merchantsSample);
     const [linkToShare, setLinkToShare] = useState('');
@@ -64,6 +66,7 @@ const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
 
     return (
         <div>
+            <Loading />
             {openShare && <Share onCloseModal={() => setOpenShare(false)} linkToShare={linkToShare} />}
             {openReview && <ReviewForm setOpenReviewSuccess={setOpenReviewSuccess} setOpenReview={setOpenReview} onCloseModal={() => setOpenReview(false)} />}
             {openReviewSuccess && <ReviewSuccess onCloseModal={() => setOpenReviewSuccess(false)} />}
@@ -98,7 +101,7 @@ const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                        {merchants.map((merchant, index) => (
+                        {merchants.map((merchant:any, index:any) => (
                             <tr key={index} onClick={() => setLinkToShare(merchant.link)}>
                                 <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
                                     {merchant.merchant}

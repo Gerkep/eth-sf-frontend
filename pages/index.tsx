@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Image from 'next/image';
+import Loading from '../components/Loading';
 
 const navigation = [
   { name: 'Pricing', href: '#' },
@@ -14,6 +15,7 @@ const navigation = [
 const Landing = () => {
   return (
     <div className="bg-white">
+      <Loading />
       <div>
         <Popover className="relative bg-white">
           <div className="mx-auto flex w-full items-center justify-between px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-8">
@@ -104,12 +106,11 @@ const Landing = () => {
                 </div>
                 <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
                   <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                    <span className="block text-white">Take control of your</span>
+                    <span className="block text-white">Take control over your</span>
                     <span className="block text-indigo-200">finances.</span>
                   </h1>
                   <p className="mx-auto mt-6 max-w-lg text-center text-xl text-indigo-200 sm:max-w-3xl">
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
-                    amet fugiat veniam occaecat fugiat aliqua.
+                    Build indisputable on-chain reputation and books as a store, browse only reliable reviews from buyers as a customer.
                   </p>
                   <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                     <div className="flex items-center justify-center sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
@@ -136,28 +137,28 @@ const Landing = () => {
 
           {/* Logo cloud */}
           <div className="bg-gray-100">
-            <div className="mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl py-8 px-4 sm:px-6 lg:px-8">
               <p className="text-center text-base font-medium text-gray-500">
                 Powered by the best
               </p>
-              <div className="mt-6 flex justify-center flex-wrap">
+              <div className="mt-4 flex justify-center flex-wrap">
                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-                <div className="h-20 w-40 relative mr-5 ml-5">
+                <div className="h-20 w-40 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
                     <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://xmtp.org/img/logomark.svg"}></Image>
                 </div>
                 </div>
                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-                <div className="h-20 w-40 relative mr-5 ml-5">
+                <div className="h-20 w-40 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
                     <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://forkast.news/wp-content/uploads/2021/12/ethereum-name-service-ens-logo-vector-1.png"}></Image>
                   </div>
                 </div>
                 <div className="col-span-1 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1">
-                <div className="h-20 w-40 relative mr-5 ml-5">
+                <div className="h-20 w-40 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
                     <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://seeklogo.com/images/S/skale-labs-logo-BB412F465C-seeklogo.com.png"}></Image>
                   </div>
                 </div>
                 <div className="col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
-                <div className="h-20 w-40 relative mr-5 ml-5">
+                <div className="h-20 w-48 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
                     <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://worldcoin.org/icons/logo.svg"}></Image>
                   </div>
                 </div>
