@@ -71,7 +71,7 @@ const UserDashboard = () => {
             </div>
         </div>
         </div>
-        { address && tab === "Payments" && <PaymentsTable /> }
+        { address && tab === "Payments" && <PaymentsTable isCustomer={true}/> }
         { address && tab === "Messages" && <Messages /> }
         </div>
         </>
