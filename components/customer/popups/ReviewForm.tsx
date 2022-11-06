@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import { useState, useEffect } from 'react';
-import StarRatingComponent from 'react-star-rating-component';
+import ReactStars from "react-rating-stars-component";
 
-const ReviewForm = ({ onCloseModal, setOpenReview }: any) => {
+const ReviewForm = ({ onCloseModal, setOpenReview, setOpenReviewSuccess }: any) => {
 
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
   const [loading, setLoading] = useState(false);
-  const ref = useRef<null | HTMLDivElement>(null);
+  const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   const handleCloseClick = () => {
     onCloseModal();
@@ -15,8 +15,8 @@ const ReviewForm = ({ onCloseModal, setOpenReview }: any) => {
 
   useEffect(() => {
 
-    const onBodyClick = (event: any) => {
-      if (ref.current?.contains(event.target)) {
+    const onBodyClick = (event: { target: any; }) => {
+      if (ref.current.contains(event.target)) {
         return;
       }
       setOpenReview(false);
@@ -26,12 +26,13 @@ const ReviewForm = ({ onCloseModal, setOpenReview }: any) => {
     return () => { document.body.removeEventListener('click', onBodyClick, { capture: true }) }
   }, [])
 
-  const onFormSubmit = (event: any) => {
+  const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleCloseClick();
+    setOpenReviewSuccess(true);
   }
 
-  const ratingChanged = (newRating: any) => {
+  const ratingChanged = (newRating: number) => {
     setRating(newRating);
   };
 
@@ -52,12 +53,11 @@ const ReviewForm = ({ onCloseModal, setOpenReview }: any) => {
 
               </div>
 
-              <StarRatingComponent
-                starCount={5}
-                onStarClick={ratingChanged}
-                starColor="#ffd700"
-                name={"rating"}
-                value={rating}
+              <ReactStars
+                count={5}
+                onChange={ratingChanged}
+                size={24}
+                activeColor="#ffd700"
               />
               <div className="mt-2">
                 <label htmlFor="review">Tell us your thoughts</label>

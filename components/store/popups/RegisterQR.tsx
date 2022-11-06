@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-
+import QRCode from "react-qr-code";
 
 const RegisterQR = ({ onCloseModal, setOpenQR }: any) => {
   const [loading, setLoading] = useState(false);
@@ -39,7 +39,9 @@ const RegisterQR = ({ onCloseModal, setOpenQR }: any) => {
           <h4 className="text-s tracking-tight text-gray-700">Save it & Don&apos;t share with anyone</h4>
           <h3 className="text-l font-bold mt-3 tracking-tight text-gray-900">QR code to your reviews</h3>
           <h4 className="text-s tracking-tight text-gray-700">Share it with your customers</h4>
-          <img src={require('../img/qr.png')} alt="qr code" />
+          <div className="flex justify-center w-full mt-10 mb-10">
+              <QRCode size={192} value="https://www.alchemy.com" />
+          </div>
           <button
             onClick={() => handleCloseClick()}
             className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
