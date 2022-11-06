@@ -24,7 +24,7 @@ const Landing = () => {
                 <div>
                   <span className="sr-only">Your Company</span>
                   <div className="h-8 w-8 sm:h-10 relative">
-                  <Image alt="logo" layout='fill' objectFit='contain'  src={"https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"}></Image>
+                  <Image alt="logo" layout='fill' objectFit='contain'  src={"https://media.discordapp.net/attachments/1038274401424130128/1038742938588565564/image.png"}></Image>
                   </div>
                 </div>
               </Link>
@@ -146,29 +146,39 @@ const Landing = () => {
 
           {/* Logo cloud */}
           <div className="bg-gray-100">
-            <div className="mx-auto max-w-7xl py-8 px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-5xl py-8 px-4 sm:px-6 lg:px-8">
               <p className="text-center text-base font-medium text-gray-500">
                 Powered by the best
               </p>
               <div className="mt-4 flex justify-center flex-wrap">
                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-                <div className="h-20 w-40 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
+                <div className="h-16 w-40 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
                     <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://xmtp.org/img/logomark.svg"}></Image>
                 </div>
-                </div>
-                <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-                <div className="h-20 w-40 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
-                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://forkast.news/wp-content/uploads/2021/12/ethereum-name-service-ens-logo-vector-1.png"}></Image>
+                <div className="col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
+                <div className="h-16 w-48 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
+                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://worldcoin.org/icons/logo.svg"}></Image>
                   </div>
                 </div>
+                </div>
                 <div className="col-span-1 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1">
-                <div className="h-20 w-40 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
+                <div className="h-16 w-40 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
                     <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://seeklogo.com/images/S/skale-labs-logo-BB412F465C-seeklogo.com.png"}></Image>
                   </div>
                 </div>
                 <div className="col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
-                <div className="h-20 w-48 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
-                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://worldcoin.org/icons/logo.svg"}></Image>
+                <div className="h-18 w-48 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
+                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"http://drive.google.com/uc?export=view&id=1J_PzNcWGVCu5X5twckcaop6gCmBf3LW5"}></Image>
+                  </div>
+                </div>
+                <div className="col-span-1 mt-5 flex justify-center md:col-span-2 lg:col-span-1">
+                <div className="h-16 w-40 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
+                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://forkast.news/wp-content/uploads/2021/12/ethereum-name-service-ens-logo-vector-1.png"}></Image>
+                  </div>
+                </div>
+                <div className="col-span-2 mt-5 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
+                <div className="h-16 w-48 relative mr-7 ml-7 cursor-pointer grayscale opacity-80 hover:opacity-100 hover:grayscale-0">
+                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://www.coywolf.news/wp-content/uploads/2021/04/ipfs-logo.webp"}></Image>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = ({ setOpenSignIn, setOpenSubmitTx }: any) => {
 
@@ -11,7 +12,9 @@ const Header = ({ setOpenSignIn, setOpenSubmitTx }: any) => {
                         <Link href="/">
                             <div>
                                 <span className="sr-only">Your Company</span>
-                                <img className="h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=white" alt="" />
+                                <div className="h-24 w-24 lg:w-12 lg:h-12 w-auto relative rounded-md overflow-hidden">
+                                    <Image alt="logo" layout='fill' objectFit='contain'  src={"https://media.discordapp.net/attachments/1038274401424130128/1038742938588565564/image.png"}></Image>
+                                </div>
                             </div>
                         </Link>
                     </div>
