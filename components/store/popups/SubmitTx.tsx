@@ -4,6 +4,7 @@ import ItemFields from './ItemFields';
 import Dropdown from './Dropdown';
 import { submitReceiptServer } from '../../../utils';
 import QRCode from "react-qr-code";
+import { ethers } from 'ethers';
 
 const currencies = { USD: '$', EUR: '€', GBP: '£' }
 
@@ -21,6 +22,7 @@ const SubmitTx = ({ onCloseModal, setOpenSubmitTx }: any) => {
   const [price, setPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(0);
   const [itemName, setItemName] = useState('');
+  const [ens, setENS] = useState('');
 
   const handleCloseClick = () => {
     onCloseModal();
@@ -49,7 +51,12 @@ const SubmitTx = ({ onCloseModal, setOpenSubmitTx }: any) => {
 
     setLoading(true);
     e.preventDefault();
-    console.log(itemName, quantity, price)
+    let address: string | null = null;
+    if(ens){
+      const provider = new ethers.providers.JsonRpcProvider("https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7");
+      address = await provider.resolveName(ens);
+    }
+    console.log(address);
     const receiptData = {
       "items" : [
           {
@@ -103,6 +110,18 @@ const SubmitTx = ({ onCloseModal, setOpenSubmitTx }: any) => {
               </div>
               <form className="space-y-3 mt-4" onSubmit={(e) => signin(e)} method="POST">
                 <div>
+                <div className="mt-1">
+                    <input
+                    id="ens"
+                    name="ens"
+                    type="ens"
+                    onChange={(e) => setENS(e.target.value)}
+                    value={ens}
+                    autoComplete="ens"
+                    placeholder='gerke.eth (optional)'
+                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    />
+                </div>
                   <div style={{ display: 'flex' }}>
                     <div className="col-span-6 sm:col-span-3 mt-2 mr-2">
                       <input
