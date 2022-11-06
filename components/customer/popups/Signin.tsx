@@ -1,17 +1,14 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import React from 'react';
+import { Client } from '@xmtp/xmtp-js';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { useAccount } from 'wagmi';
+import { useAccount, useSigner } from 'wagmi';
 
 const Signin = ({onCloseModal}: any) => {
 
     const [loading, setLoading] = useState(false);
-    const {address} = useAccount()
-    
-    const handleCloseClick = () => {
-        onCloseModal();
-    };
-
+    const {address} = useAccount();
+  
   return (
     <>
     {!address &&

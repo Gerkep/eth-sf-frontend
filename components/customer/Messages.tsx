@@ -19,10 +19,8 @@ const Messages = () => {
         const xmtp = await Client.create(signer);
         const allConversations = await xmtp.conversations.list();
         setConversations(allConversations);
-        console.log(allConversations)
       }
     }
-
     let chatbox = document.querySelector('.chatbox');
     if(chatbox)
     chatbox.scrollTop = chatbox.scrollHeight;
@@ -31,14 +29,14 @@ const Messages = () => {
 }, [signer])
 
   const openChatPage = (address: any) => {
-    setOpenChat(true);
     setRecipientAddress(address);
+    setOpenChat(true);
   }
 
     return (
       <>
       {openChat ? 
-      <Chat recipientAddres={recipientAddress}/>
+      <Chat recipientAddress={recipientAddress}/>
       :
       <div className="grid grid-cols-1 mt-10 gap-4 sm:grid-cols-2 overflow-hidden">
         {conversations && 

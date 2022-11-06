@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PaymentsTable from "../components/customer/PaymentsTable";
 import Signin from "../components/customer/popups/Signin";
 import Header from "../components/customer/Header";
 import Messages from "../components/customer/Messages";
 import dynamic from "next/dynamic";
-import { useAccount } from "wagmi";
+import { useAccount, useSigner } from "wagmi";
 
 
 const tabs = [
