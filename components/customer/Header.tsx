@@ -1,14 +1,27 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { verifyUser } from '../../utils';
-import { useAccount } from "wagmi";
+import { contractABI, verifyUser } from '../../utils';
+import { useAccount, useFeeData, useSigner } from "wagmi";
+import {ethers} from "ethers";
 
 const Header = ({openSignIn}: any) => {
     const [verified, setVerified] = useState(false);
     const {address} = useAccount();
     const [loading, setLoading] = useState(false);
+    const {data: signer} = useSigner();
+
+    useEffect(()=>{
+        if(address && signer){
+            const cJomTx = new ethers.Contract("0xd0190Eb9c8a7c24be255BD9445dd07c500d4f6b3",contractABI, signer);
+            console.log(cJomTx);
+            cJomTx["registeredUser"](address).then((data : any)=>{
+                console.log(data);
+                setVerified(data);
+            })
+        }
+    },[address,signer])
     
     const verifyUserFunc = async () => {
         setLoading(true);

@@ -7,13 +7,28 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { NotificationsProvider } from '@mantine/notifications';
 
+const skale = {
+  id: 0x2696efe5,
+  name: 'Skale',
+  network: 'Skale',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Skale Network ',
+    symbol: 'SKALE',
+  },
+  rpcUrls: {
+    default: 'https://eth-sf.skalenodes.com/v1/hackathon-complex-easy-naos',
+  },
+  blockExplorers: {
+    default: { name: 'SnowTrace', url: 'https://snowtrace.io' },
+  },
+  testnet: true,
+}
+
 const { chains, provider, webSocketProvider } = configureChains(
   [
-    chain.mainnet,
-    chain.polygon,
-    chain.optimism,
-    chain.arbitrum,
-    chain.polygonMumbai
+    chain.polygonMumbai,
+    skale
   ],
   [
     alchemyProvider({
