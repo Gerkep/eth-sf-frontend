@@ -120,3 +120,20 @@ export const getReceiptsStoreServer = async (storeKey : any, storeSignal : any) 
         return null;
     }
 }
+export const getTxDeclarationServer = async(userAddr : any, userSignal :any) => {
+    try {
+        const response = await axios.post(`${serverUrl}/get-store-transactions`, {
+            userAddr,
+            userSignal
+          });
+        console.log(response);
+        if(response.status == 200){
+            return response.data.transactions
+        }else {
+            return null 
+        }
+    }catch (e)  {
+        console.log(e);
+        return null;
+    }
+}

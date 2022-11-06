@@ -7,12 +7,10 @@ import { getReceiptsStoreServer, getReceiptsUserServer } from "../../utils";
 
 const today = new Date().toLocaleDateString();
 
-const merchantsSample = [
-    { merchant: 'Apple Inc.', date: today.toString(), value: '999', currency: 'USDC', link: "https://www.receipt.com" },
-    { merchant: 'Apple Inc.', date: today.toString(), value: '249', currency: 'USDC', link: "https://www.receipt2.com" }
+const merchantsSample : any = [
 ]
 
-const PaymentsTable = ({ isCustomer }: any) => {
+const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
 
     const [openShare, setOpenShare] = useState(false);
     const {address} = useAccount();
@@ -25,35 +23,41 @@ const PaymentsTable = ({ isCustomer }: any) => {
         if(isCustomer && address){
             getReceiptsUserServer(address).then((data:any)=>{
                 let parsedData = data.map((item : any )=>{
-
-                    let parsedDetail = item.detail.split("_");
-                    return {
-                        merchant : parsedDetail[0] || "None",
-                        date : item.date || today,
-                        value : parsedDetail[1] || "NaN",
-                        currency : parsedDetail[2] || "NaN",
-                        link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
+                    if(data){
+                        let parsedDetail = item.detail.split("_");
+                        return {
+                            merchant : parsedDetail[0] || "None",
+                            date : item.date || today,
+                            value : parsedDetail[1] || "NaN",
+                            currency : parsedDetail[2] || "NaN",
+                            link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
+                        }
                     }
+
                 })
                 setMerchants(parsedData)
             })
         }
     },[address ,isCustomer])
 
+    console.log(storeKey,storeId);
+
     useEffect(()=>{
         if(!isCustomer){
-            getReceiptsStoreServer("store1",0).then((data:any)=>{
-                let parsedData = data.map((item : any )=>{
-                    let parsedDetail = item.detail.split("_");
-                    return {
-                        merchant : parsedDetail[0] || "None",
-                        date : item.date || today,
-                        value : parsedDetail[1] || "NaN",
-                        currency : parsedDetail[2] || "NaN",
-                        link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
-                    }
-                })
-                setMerchants(parsedData)
+            getReceiptsStoreServer(storeKey,storeId).then((data:any)=>{
+                if(data){
+                    let parsedData = data.map((item : any )=>{
+                        let parsedDetail = item.detail.split("_");
+                        return {
+                            merchant : parsedDetail[0] || "None",
+                            date : item.date || today,
+                            value : parsedDetail[1] || "NaN",
+                            currency : parsedDetail[2] || "NaN",
+                            link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
+                        }
+                    })
+                    setMerchants(parsedData)
+                }
             })
         }
     },[])
@@ -94,7 +98,7 @@ const PaymentsTable = ({ isCustomer }: any) => {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                        {merchants.map((merchant, index) => (
+                        {merchants.map((merchant:any, index:any) => (
                             <tr key={index} onClick={() => setLinkToShare(merchant.link)}>
                                 <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
                                     {merchant.merchant}
