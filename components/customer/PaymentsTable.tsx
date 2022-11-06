@@ -5,6 +5,7 @@ import ReviewSuccess from "./popups/ReviewSuccess";
 import { useAccount, useConnect } from "wagmi";
 import { getReceiptsStoreServer, getReceiptsUserServer } from "../../utils";
 import Loading from "../Loading";
+import Pdf from "./popups/Pdf";
 
 const today = new Date().toLocaleDateString();
 
@@ -20,6 +21,7 @@ const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
     const [linkToShare, setLinkToShare] = useState('');
     const [openReview, setOpenReview] = useState(false);
     const [openReviewSuccess, setOpenReviewSuccess] = useState(false);
+    const [openPdf, setOpenPdf] = useState(false);
 
     useEffect(()=>{
         if(isCustomer && address){
@@ -67,6 +69,7 @@ const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
     return (
         <div>
             <Loading />
+            {openPdf && <Pdf link={linkToShare} onCloseModal={() => setOpenPdf(false)}/>}
             {openShare && <Share onCloseModal={() => setOpenShare(false)} linkToShare={linkToShare} />}
             {openReview && <ReviewForm setOpenReviewSuccess={setOpenReviewSuccess} setOpenReview={setOpenReview} onCloseModal={() => setOpenReview(false)} />}
             {openReviewSuccess && <ReviewSuccess onCloseModal={() => setOpenReviewSuccess(false)} />}
@@ -116,7 +119,7 @@ const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
                                 <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{merchant.currency}</td>
                                 <td className="px-3 py-4 text-sm text-gray-500">{merchant.value}</td>
                                 <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <button className="text-indigo-600 hover:text-indigo-900">
+                                    <button onClick={() => setOpenPdf(true)} className="text-indigo-600 hover:text-indigo-900">
                                         Pdf<span className="sr-only"></span>
                                     </button>
                                 </td>

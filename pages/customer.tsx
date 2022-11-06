@@ -6,6 +6,7 @@ import Messages from "../components/customer/Messages";
 import dynamic from "next/dynamic";
 import { useAccount, useSigner } from "wagmi";
 import Loading from "../components/Loading";
+import Pdf from "../components/customer/popups/Pdf";
 
 
 const tabs = [
@@ -28,7 +29,6 @@ const UserDashboard = () => {
         <Loading />
         <Header />
         { !address && <Signin onCloseModal={() => setOpenSignin(false)}/> }
-
         <div className="px-4 mt-4 sm:px-6 lg:px-8">
         <div style={{height: "8vh"}} className="border-b border-gray-200 pb-5 sm:pb-0">
         <div className="mt-3 sm:mt-4">
