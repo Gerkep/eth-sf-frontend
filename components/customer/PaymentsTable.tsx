@@ -23,15 +23,17 @@ const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
         if(isCustomer && address){
             getReceiptsUserServer(address).then((data:any)=>{
                 let parsedData = data.map((item : any )=>{
-
-                    let parsedDetail = item.detail.split("_");
-                    return {
-                        merchant : parsedDetail[0] || "None",
-                        date : item.date || today,
-                        value : parsedDetail[1] || "NaN",
-                        currency : parsedDetail[2] || "NaN",
-                        link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
+                    if(data){
+                        let parsedDetail = item.detail.split("_");
+                        return {
+                            merchant : parsedDetail[0] || "None",
+                            date : item.date || today,
+                            value : parsedDetail[1] || "NaN",
+                            currency : parsedDetail[2] || "NaN",
+                            link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
+                        }
                     }
+
                 })
                 setMerchants(parsedData)
             })
@@ -43,17 +45,19 @@ const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
     useEffect(()=>{
         if(!isCustomer){
             getReceiptsStoreServer(storeKey,storeId).then((data:any)=>{
-                let parsedData = data.map((item : any )=>{
-                    let parsedDetail = item.detail.split("_");
-                    return {
-                        merchant : parsedDetail[0] || "None",
-                        date : item.date || today,
-                        value : parsedDetail[1] || "NaN",
-                        currency : parsedDetail[2] || "NaN",
-                        link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
-                    }
-                })
-                setMerchants(parsedData)
+                if(data){
+                    let parsedData = data.map((item : any )=>{
+                        let parsedDetail = item.detail.split("_");
+                        return {
+                            merchant : parsedDetail[0] || "None",
+                            date : item.date || today,
+                            value : parsedDetail[1] || "NaN",
+                            currency : parsedDetail[2] || "NaN",
+                            link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
+                        }
+                    })
+                    setMerchants(parsedData)
+                }
             })
         }
     },[])
