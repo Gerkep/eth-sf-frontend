@@ -5,6 +5,7 @@ import Share from "../components/customer/popups/Share";
 import Header from "../components/customer/Header";
 import Messages from "../components/customer/Messages";
 import { useAccount } from "wagmi";
+import dynamic from "next/dynamic";
 
 const tabs = [
     { name: 'Payments' },
@@ -76,4 +77,6 @@ const UserDashboard = () => {
     )
   }
 
-  export default UserDashboard;
+  export default dynamic(() => Promise.resolve(UserDashboard), { 
+    ssr: false 
+})

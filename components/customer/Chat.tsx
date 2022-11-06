@@ -8,22 +8,25 @@ import { Wallet } from 'ethers'
 
 const Chat = ({ recipientAddress }: any) => {
 
-    const wallet = Wallet.createRandom()
+    const {data: signer} = useSigner();
 
     useEffect(() => {
         const getConversation = async () => {
-            const xmtp = await Client.create(wallet)
-            const conversation = await xmtp.conversations.newConversation(
-                '0x3F11b27F323b62B159D2642964fa27C46C841897'
-            )
-            const messages = await conversation.messages();
-            await conversation.send('gm');
+            if(signer){
+                const xmtp = await Client.create(signer)
+                const conversation = await xmtp.conversations.newConversation(
+                    '0x3F11b27F323b62B159D2642964fa27C46C841897'
+                )
+                
+                const messages = await conversation.messages();
+                console.log(messages)
+            }
         }
         let chatbox = document.querySelector('.chatbox');
         if(chatbox)
         chatbox.scrollTop = chatbox.scrollHeight;
         getConversation();
-    }, [])
+    }, [signer])
 
     return (
         <div>

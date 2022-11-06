@@ -3,26 +3,31 @@ import { useState } from 'react';
 import { Client } from '@xmtp/xmtp-js'
 import { useSigner } from 'wagmi';
 import { Wallet } from 'ethers'
+import { ethers } from "ethers";
 
 const Signin = ({onCloseModal}: any) => {
 
     const wallet = Wallet.createRandom();
     const [ens, setENS] = useState('');
+    const {data: signer} = useSigner();
     const [loading, setLoading] = useState(false);
     const handleCloseClick = () => {
         onCloseModal();
     };
 
     const share = async (e: React.FormEvent<HTMLFormElement>) => {
-      console.log("share")
         setLoading(true);
         e.preventDefault();
-        const xmtp = await Client.create(wallet)
-        const newConversation = await xmtp.conversations.newConversation(
-          '0x3F11b27F323b62B159D2642964fa27C46C841897'
-        )
-        console.log(`Saying GM to ${newConversation.peerAddress}`)
-        await newConversation.send('gm')
+        const provider = new ethers.providers.JsonRpcProvider("https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7");
+        var address = await provider.resolveName(ens);
+        if(signer && address){
+          const xmtp = await Client.create(signer)
+          const newConversation = await xmtp.conversations.newConversation(
+            address
+          )
+          console.log(`Saying GM to ${newConversation.peerAddress}`)
+          await newConversation.send('gmgm')
+        }
       
         handleCloseClick();
         setLoading(false);
@@ -56,7 +61,7 @@ const Signin = ({onCloseModal}: any) => {
                     value={ens}
                     autoComplete="ens"
                     placeholder='gerke.eth'
-                    // required
+                    required
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     />
                 </div>

@@ -21,7 +21,7 @@ const Landing = () => {
               <Link href="/">
                 <div>
                   <span className="sr-only">Your Company</span>
-                  <div className="h-8 w-40 sm:h-10 relative">
+                  <div className="h-8 w-8 sm:h-10 relative">
                   <Image alt="logo" layout='fill' objectFit='contain'  src={"https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"}></Image>
                   </div>
                 </div>
