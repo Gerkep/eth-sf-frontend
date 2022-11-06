@@ -2,8 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Client } from '@xmtp/xmtp-js'
 import { useSigner } from 'wagmi';
-import { Wallet } from 'ethers'
-import { ethers } from "ethers";
+import { Wallet, ethers } from 'ethers'
 
 const Signin = ({onCloseModal}: any) => {
 

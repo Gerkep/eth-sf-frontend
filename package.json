@@ -12,11 +12,14 @@
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
     "@rainbow-me/rainbowkit": "^0.7.4",
+    "@types/react-star-rating-component": "^1.4.1",
     "@xmtp/xmtp-js": "^7.0.1",
     "ethers": "^5.0.0",
     "next": "^12.1.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-rating-stars-component": "^2.2.0",
+    "react-star-rating-component": "^1.4.1",
     "wagmi": "^0.7.5"
   },
   "devDependencies": {
