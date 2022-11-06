@@ -7,9 +7,7 @@ import { getReceiptsStoreServer, getReceiptsUserServer } from "../../utils";
 
 const today = new Date().toLocaleDateString();
 
-const merchantsSample = [
-    { merchant: 'Apple Inc.', date: today.toString(), value: '999', currency: 'USDC', link: "https://www.receipt.com" },
-    { merchant: 'Apple Inc.', date: today.toString(), value: '249', currency: 'USDC', link: "https://www.receipt2.com" }
+const merchantsSample : any = [
 ]
 
 const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
