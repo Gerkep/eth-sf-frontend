@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  images: {dangerouslyAllowSVG: true, domains: ['tailwindui.com', "images.unsplash.com", "xmtp.org"]},
+  images: {dangerouslyAllowSVG: true, domains: ['tailwindui.com', "images.unsplash.com", "xmtp.org", "forkast.news", "seeklogo.com", "worldcoin.org"]},
 };
 
 webpack: (config, { isServer }) => {
