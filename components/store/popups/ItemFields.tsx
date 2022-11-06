@@ -81,8 +81,6 @@ const ItemFields = ({ currency, currencies }: any) => {
                 <div>
                     <h3 className="text-l font-bold mt-1 tracking-tight text-gray-900">Subtotal</h3>
                     <h2 style={{ display: 'flex' }} className="text-center rounded-md border border-gray-300 text-l font-bold tracking-tight text-gray-900 p-1">{(price * quantity).toFixed(2)}{displayCurrency()}</h2>
-
-
                 </div>
                 <div>
                     <h3 className="text-l font-bold mt-1 tracking-tight text-gray-900">Tax</h3>
