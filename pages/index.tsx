@@ -148,17 +148,17 @@ const Landing = () => {
                 </div>
                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                 <div className="h-20 w-40 relative mr-5 ml-5">
-                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://tailwindui.com/img/logos/workcation-logo-gray-400.svg"}></Image>
+                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://forkast.news/wp-content/uploads/2021/12/ethereum-name-service-ens-logo-vector-1.png"}></Image>
                   </div>
                 </div>
                 <div className="col-span-1 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1">
                 <div className="h-20 w-40 relative mr-5 ml-5">
-                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://tailwindui.com/img/logos/workcation-logo-gray-400.svg"}></Image>
+                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://seeklogo.com/images/S/skale-labs-logo-BB412F465C-seeklogo.com.png"}></Image>
                   </div>
                 </div>
                 <div className="col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
                 <div className="h-20 w-40 relative mr-5 ml-5">
-                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://tailwindui.com/img/logos/workcation-logo-gray-400.svg"}></Image>
+                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://worldcoin.org/icons/logo.svg"}></Image>
                   </div>
                 </div>
               </div>
