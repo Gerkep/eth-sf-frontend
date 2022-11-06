@@ -12,7 +12,7 @@ const merchantsSample = [
     { merchant: 'Apple Inc.', date: today.toString(), value: '249', currency: 'USDC', link: "https://www.receipt2.com" }
 ]
 
-const PaymentsTable = ({ isCustomer }: any) => {
+const PaymentsTable = ({ isCustomer, storeKey, storeId }: any) => {
 
     const [openShare, setOpenShare] = useState(false);
     const {address} = useAccount();
@@ -40,9 +40,11 @@ const PaymentsTable = ({ isCustomer }: any) => {
         }
     },[address ,isCustomer])
 
+    console.log(storeKey,storeId);
+
     useEffect(()=>{
         if(!isCustomer){
-            getReceiptsStoreServer("store1",0).then((data:any)=>{
+            getReceiptsStoreServer(storeKey,storeId).then((data:any)=>{
                 let parsedData = data.map((item : any )=>{
                     let parsedDetail = item.detail.split("_");
                     return {

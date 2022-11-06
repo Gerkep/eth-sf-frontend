@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { registerUserInServer } from '../../../utils';
 
-const Register = ({ onCloseModal, setOpenSignIn, setOpenRegisterQR }: any) => {
+const Register = ({ onCloseModal, setOpenSignIn, setOpenRegisterQR, setStoreId, setStoreKey }: any) => {
 
   const [ens, setEns] = useState('')
   const [merchant, setMerchant] = useState('')
@@ -25,9 +25,11 @@ const Register = ({ onCloseModal, setOpenSignIn, setOpenRegisterQR }: any) => {
     const storeId = await registerUserInServer(e.target.company!.value,e.target.email!.value);
     console.log(storeId);
     // await registerStoreServer(e.target.email!,e.target!.company!);
+    setStoreId(storeId);
+    setStoreKey(e.target.company!.value);
 
-    console.log(process.env.SERVER_URL);
-
+    localStorage.setItem("storeKey",e.target.company!.value)
+    localStorage.setItem("storeId",storeId);
     handleCloseClick();
     setLoading(false);
     setOpenRegisterQR(true);
