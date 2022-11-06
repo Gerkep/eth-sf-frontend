@@ -28,8 +28,8 @@ const Register = ({ onCloseModal, setOpenSignIn, setOpenRegisterQR, setStoreId, 
     setStoreId(storeId);
     setStoreKey(merchant);
 
-    localStorage.setItem("storeKey",merchant)
-    localStorage.setItem("storeId",storeId);
+    // localStorage.setItem("storeKey",merchant)
+    // localStorage.setItem("storeId",storeId);
     handleCloseClick();
     setLoading(false);
     setOpenRegisterQR(true);
