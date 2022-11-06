@@ -4,14 +4,12 @@ import { useState } from 'react'
 import { Client } from '@xmtp/xmtp-js'
 import { showNotification } from '@mantine/notifications';
 import { useSigner } from 'wagmi';
-import { useRouter } from 'next/router';
 
 export default function MessageInput({recipientAddress}: any) {
 
     const [file, setFile] = useState('');
     const [message, setMessage] = useState('');
     const {data: signer} = useSigner();
-    const router = useRouter();
     
     const send = async () => {
         try{
@@ -21,7 +19,11 @@ export default function MessageInput({recipientAddress}: any) {
               recipientAddress
             )
             await newConversation.send(message);
-            router.reload();
+            for await (const message of await newConversation.streamMessages()) {
+              if (message.senderAddress === xmtp.address) {
+                continue
+              }
+            }
           }
         } catch(e) {
           showNotification({

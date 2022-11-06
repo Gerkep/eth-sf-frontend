@@ -61,7 +61,7 @@ const Chat = ({ recipientAddress }: any) => {
             <div style={{height: "66vh"}} className="overflow-scroll pb-16 lg:pb-10 chatbox">
                 {renderMessages()}
             </div>
-            <MessageInput recipientAddress={recipientAddress}/>
+            <MessageInput recipientAddress={recipientAddress} />
         </div>
     )
 }
