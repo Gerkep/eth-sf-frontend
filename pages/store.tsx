@@ -29,6 +29,8 @@ const StoreDashboard = () => {
     const [storeKey, setStoreKey] = useState(undefined);
     const [storeId, setStoreId] = useState(undefined);
 
+    const localStoreKey = typeof window !== 'undefined' ? localStorage.getItem('storeKey') : null
+
     return (
         <>
             <Loading />
@@ -36,7 +38,7 @@ const StoreDashboard = () => {
             {openSignIn && <SignIn onCloseModal={() => setOpenSignIn(false)} setOpenRegister={setOpenRegister} />}
             {openSubmitTx && <SubmitTx setOpenSubmitTx={setOpenSubmitTx}
                 onCloseModal={() => setOpenSubmitTx(false)} />}
-            {!(storeId || localStorage.getItem("storeKey")) && openRegister && <Register setOpenRegister={setOpenRegister} setOpenSignIn={setOpenSignIn} onCloseModal={() => setOpenRegister(false)} setOpenRegisterQR={setOpenRegisterQR} setStoreKey={setStoreKey} setStoreId={setStoreId}/>}
+            {!(storeId || localStoreKey) && openRegister && <Register setOpenRegister={setOpenRegister} setOpenSignIn={setOpenSignIn} onCloseModal={() => setOpenRegister(false)} setOpenRegisterQR={setOpenRegisterQR} setStoreKey={setStoreKey} setStoreId={setStoreId}/>}
             {openRegisterQR && <RegisterQR setOpenRegisterQR={setOpenRegisterQR} onCloseModal={() => setOpenRegisterQR(false)} storeKey={storeKey} storeId={storeId} />}
 
             <div className="px-4 mt-8 sm:px-6 lg:px-8">
@@ -84,7 +86,7 @@ const StoreDashboard = () => {
             </nav>
                     </div>
                 </div>
-                {!openSignIn && tab === "Transaction list" && <PaymentsTable storeKey={storeKey || localStorage.getItem("storeKey")} storeId={storeId || localStorage.getItem("storeKey")}/>}
+                {!openSignIn && tab === "Transaction list" && <PaymentsTable storeKey={storeKey || localStorage.getItem("storeKey")} storeId={storeId || localStorage.getItem("storeId")}/>}
                 {!openSignIn && tab === "Stats" && <RevenueChart />}
             </div>
         </>
