@@ -5,6 +5,7 @@ import Header from "../components/customer/Header";
 import Messages from "../components/customer/Messages";
 import dynamic from "next/dynamic";
 import { useAccount, useSigner } from "wagmi";
+import Loading from "../components/Loading";
 
 
 const tabs = [
@@ -24,6 +25,7 @@ const UserDashboard = () => {
 
     return (
         <>
+        <Loading />
         <Header />
         { !address && <Signin onCloseModal={() => setOpenSignin(false)}/> }
 

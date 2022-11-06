@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import ReviewsDetail from '../../../components/store/reviewsDetail';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Loading from '../../../components/Loading';
 
 const people = [
     {
@@ -44,6 +45,7 @@ const Reviews = (props: { onCloseModal: any, setOpenRegister: any, storeId: Infe
 
     return (
         <div className="m-3">
+            <Loading />
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div className="flex-shrink-0 mr-2">
                     <div className="h-8 w-8 rounded-full relative overflow-hidden">

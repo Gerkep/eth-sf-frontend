@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Image from 'next/image';
+import Loading from '../components/Loading';
 
 const navigation = [
   { name: 'Pricing', href: '#' },
@@ -14,6 +15,7 @@ const navigation = [
 const Landing = () => {
   return (
     <div className="bg-white">
+      <Loading />
       <div>
         <Popover className="relative bg-white">
           <div className="mx-auto flex w-full items-center justify-between px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-8">
@@ -108,8 +110,7 @@ const Landing = () => {
                     <span className="block text-indigo-200">finances.</span>
                   </h1>
                   <p className="mx-auto mt-6 max-w-lg text-center text-xl text-indigo-200 sm:max-w-3xl">
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
-                    amet fugiat veniam occaecat fugiat aliqua.
+                    Build indisputable on-chain reputation and books as a store, browse only reliable reviews from buyers as a customer.
                   </p>
                   <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                     <div className="flex items-center justify-center sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
