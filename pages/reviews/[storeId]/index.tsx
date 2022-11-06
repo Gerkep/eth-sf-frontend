@@ -33,7 +33,7 @@ const people = [
 export { people };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const storeId = context.params?.eventId
+    const storeId = context.params?.storeId
     return {
       props: {
         storeId

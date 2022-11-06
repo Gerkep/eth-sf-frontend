@@ -67,7 +67,7 @@ const SubmitTx = ({ onCloseModal, setOpenSubmitTx }: any) => {
       ],
       "total" : price
   }
-    let data = await submitReceiptServer(receiptData,e.target.storeKey!.value,0,"MYR", "Malaysia", null);
+    let data = await submitReceiptServer(receiptData,storeKey,0,"MYR", "Malaysia", null);
     let link = `https://${data.uri}.ipfs.w3s.link/output.pdf`;
     let detail = data.detail;
     let hash = data.hash;

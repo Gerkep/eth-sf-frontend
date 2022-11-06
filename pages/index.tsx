@@ -104,7 +104,7 @@ const Landing = () => {
                   </div>
                   <div className="absolute inset-0 bg-indigo-700 mix-blend-multiply" />
                 </div>
-                <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+                <div className="relative px-4 py-16 sm:px-6 sm:py-16 lg:py-20 lg:px-8">
                   <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
                     <span className="block text-white">Take control over your</span>
                     <span className="block text-indigo-200">finances.</span>
@@ -129,6 +129,15 @@ const Landing = () => {
                       </button>
                       </Link>
                     </div>
+                  </div>
+                  <div className='w-full flex justify-center mt-6'>
+                  <Link href="/stores">
+                      <button
+                        className="flex items-center justify-center px-4 py-3 text-base font-medium text-white sm:px-8"
+                      >
+                        Explore stores
+                      </button>
+                      </Link>
                   </div>
                 </div>
               </div>

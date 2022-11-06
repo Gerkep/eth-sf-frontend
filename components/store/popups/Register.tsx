@@ -22,13 +22,13 @@ const Register = ({ onCloseModal, setOpenSignIn, setOpenRegisterQR, setStoreId, 
     setLoading(true);
     e.preventDefault();
 
-    const storeId = await registerUserInServer(e.target.company!.value,e.target.email!.value);
+    const storeId = await registerUserInServer(merchant, email);
     console.log(storeId);
     // await registerStoreServer(e.target.email!,e.target!.company!);
     setStoreId(storeId);
-    setStoreKey(e.target.company!.value);
+    setStoreKey(merchant);
 
-    localStorage.setItem("storeKey",e.target.company!.value)
+    localStorage.setItem("storeKey",merchant)
     localStorage.setItem("storeId",storeId);
     handleCloseClick();
     setLoading(false);
