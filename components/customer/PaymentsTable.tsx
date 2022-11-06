@@ -7,16 +7,17 @@ import { getReceiptsStoreServer, getReceiptsUserServer } from "../../utils";
 
 const today = new Date().toLocaleDateString();
 
-const peopleSample = [
-    { merchant: 'Apple Inc.', date: today.toString(), value: '999', currency: 'USDC' },
-    { merchant: 'Apple Inc.', date: today.toString(), value: '249', currency: 'USDC' }
+const merchantsSample = [
+    { merchant: 'Apple Inc.', date: today.toString(), value: '999', currency: 'USDC', link: "https://www.receipt.com" },
+    { merchant: 'Apple Inc.', date: today.toString(), value: '249', currency: 'USDC', link: "https://www.receipt2.com" }
 ]
 
 const PaymentsTable = ({ isCustomer }: any) => {
 
     const [openShare, setOpenShare] = useState(false);
     const {address} = useAccount();
-    const [people, setPeople] = useState(peopleSample);
+    const [merchants, setMerchants] = useState(merchantsSample);
+    const [linkToShare, setLinkToShare] = useState('');
     const [openReview, setOpenReview] = useState(false);
     const [openReviewSuccess, setOpenReviewSuccess] = useState(false);
 
@@ -31,10 +32,10 @@ const PaymentsTable = ({ isCustomer }: any) => {
                         date : item.date || today,
                         value : parsedDetail[1] || "NaN",
                         currency : parsedDetail[2] || "NaN",
-                        pdf : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
+                        link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
                     }
                 })
-                setPeople(parsedData)
+                setMerchants(parsedData)
             })
         }
     },[address ,isCustomer])
@@ -43,24 +44,23 @@ const PaymentsTable = ({ isCustomer }: any) => {
         if(!isCustomer){
             getReceiptsStoreServer("store1",0).then((data:any)=>{
                 let parsedData = data.map((item : any )=>{
-
                     let parsedDetail = item.detail.split("_");
                     return {
                         merchant : parsedDetail[0] || "None",
                         date : item.date || today,
                         value : parsedDetail[1] || "NaN",
                         currency : parsedDetail[2] || "NaN",
-                        pdf : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
+                        link : `https://${item.ipfsURI}.ipfs.w3s.link/output.pdf`
                     }
                 })
-                setPeople(parsedData)
+                setMerchants(parsedData)
             })
         }
     },[])
 
     return (
         <div>
-            {openShare && <Share onCloseModal={() => setOpenShare(false)} />}
+            {openShare && <Share onCloseModal={() => setOpenShare(false)} linkToShare={linkToShare} />}
             {openReview && <ReviewForm setOpenReviewSuccess={setOpenReviewSuccess} setOpenReview={setOpenReview} onCloseModal={() => setOpenReview(false)} />}
             {openReviewSuccess && <ReviewSuccess onCloseModal={() => setOpenReviewSuccess(false)} />}
             <div className="-mx-4 mt-4 overflow-hidden shadow sm:-mx-6 md:mx-0 md:rounded-lg">
@@ -94,20 +94,20 @@ const PaymentsTable = ({ isCustomer }: any) => {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                        {people.map((person, index) => (
-                            <tr key={index}>
+                        {merchants.map((merchant, index) => (
+                            <tr key={index} onClick={() => setLinkToShare(merchant.link)}>
                                 <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-                                    {person.merchant}
+                                    {merchant.merchant}
                                     <dl className="font-normal lg:hidden">
                                         <dt className="sr-only">Title</dt>
-                                        <dd className="mt-1 truncate text-gray-700">{person.date}</dd>
+                                        <dd className="mt-1 truncate text-gray-700">{merchant.date}</dd>
                                         <dt className="sr-only sm:hidden">Email</dt>
-                                        <dd className="mt-1 truncate text-gray-500 sm:hidden">{person.currency}</dd>
+                                        <dd className="mt-1 truncate text-gray-500 sm:hidden">{merchant.currency}</dd>
                                     </dl>
                                 </td>
-                                <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{person.date}</td>
-                                <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{person.currency}</td>
-                                <td className="px-3 py-4 text-sm text-gray-500">{person.value}</td>
+                                <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{merchant.date}</td>
+                                <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{merchant.currency}</td>
+                                <td className="px-3 py-4 text-sm text-gray-500">{merchant.value}</td>
                                 <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                     <button className="text-indigo-600 hover:text-indigo-900">
                                         Pdf<span className="sr-only"></span>

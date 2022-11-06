@@ -5,7 +5,7 @@ import { useSigner } from 'wagmi';
 import { ethers } from 'ethers'
 import { showNotification } from '@mantine/notifications';
 
-const Signin = ({onCloseModal}: any) => {
+const Signin = ({onCloseModal, linkToShare}: any) => {
 
     const [ens, setENS] = useState('');
     const [givenAddress, setGivenAddress] = useState('');
@@ -31,8 +31,7 @@ const Signin = ({onCloseModal}: any) => {
             const newConversation = await xmtp.conversations.newConversation(
               address
             )
-            console.log(`Saying GM to ${newConversation.peerAddress}`)
-            await newConversation.send('gmgm')
+            await newConversation.send(`Receipt link: ${linkToShare}`)
             handleCloseClick();
           } catch(e) {
             showNotification({

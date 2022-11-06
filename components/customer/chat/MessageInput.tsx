@@ -1,9 +1,44 @@
 import { PaperClipIcon } from '@heroicons/react/20/solid'
+import { ethers } from 'ethers';
 import { useState } from 'react'
+import { Client } from '@xmtp/xmtp-js'
+import { showNotification } from '@mantine/notifications';
+import { useSigner } from 'wagmi';
 
-export default function MessageInput() {
+export default function MessageInput({recipientAddress}: any) {
 
     const [file, setFile] = useState('');
+    const [message, setMessage] = useState('');
+    const {data: signer} = useSigner();
+    
+    const send = async () => {
+        try{
+          if(signer && message){
+            const xmtp = await Client.create(signer)
+            const newConversation = await xmtp.conversations.newConversation(
+              recipientAddress
+            )
+            await newConversation.send(message);
+            for await (const message of await newConversation.streamMessages()) {
+              if (message.senderAddress === xmtp.address) {
+                continue
+              }
+            }
+          }
+        } catch(e) {
+          showNotification({
+            id: 'error',
+            disallowClose: true,
+            autoClose: 4000,
+            title: "Something went wrong...",
+            message: 'Bruh.',
+            color: 'red',
+            style: { 
+                backgroundColor: "#ECECEC",
+            },
+        })
+        }
+      }
 
   return (
     <div className="flex items-start space-x-4">
@@ -29,6 +64,8 @@ export default function MessageInput() {
                     <textarea
                     rows={1}
                     name="comment"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     id="comment"
                     className="block w-full resize-none border-0 py-2 px-2 outline-0 sm:text-sm"
                     placeholder="Message"
@@ -38,7 +75,7 @@ export default function MessageInput() {
             </form>
             <div className="flex-shrink-0">
               <button
-                type="submit"
+                onClick={() => send()}
                 className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Send

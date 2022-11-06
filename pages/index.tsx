@@ -143,7 +143,7 @@ const Landing = () => {
               <div className="mt-6 flex justify-center flex-wrap">
                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                 <div className="h-20 w-40 relative mr-5 ml-5">
-                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://tailwindui.com/img/logos/workcation-logo-gray-400.svg"}></Image>
+                    <Image alt="tuple" layout='fill' objectFit='contain'  src={"https://xmtp.org/img/logomark.svg"}></Image>
                 </div>
                 </div>
                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
