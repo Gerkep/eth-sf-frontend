@@ -1,11 +1,11 @@
 import { useState } from "react";
 import PaymentsTable from "../components/customer/PaymentsTable";
 import Signin from "../components/customer/popups/Signin";
-import Share from "../components/customer/popups/Share";
 import Header from "../components/customer/Header";
 import Messages from "../components/customer/Messages";
-import { useAccount } from "wagmi";
 import dynamic from "next/dynamic";
+import { useAccount } from "wagmi";
+
 
 const tabs = [
     { name: 'Payments' },
@@ -18,13 +18,14 @@ function classNames(...classes: string[]) {
 
 const UserDashboard = () => {
 
-    const {address} = useAccount();
+    const [openSignin, setOpenSignin] = useState(true);
+    const { address } = useAccount();
     const [tab, setTab] = useState("Payments");
 
     return (
         <>
         <Header />
-        { !address && <Signin /> }
+        { !address && <Signin onCloseModal={() => setOpenSignin(false)}/> }
 
         <div className="px-4 mt-4 sm:px-6 lg:px-8">
         <div style={{height: "8vh"}} className="border-b border-gray-200 pb-5 sm:pb-0">
@@ -76,7 +77,6 @@ const UserDashboard = () => {
         </>
     )
   }
-
   export default dynamic(() => Promise.resolve(UserDashboard), { 
     ssr: false 
 })

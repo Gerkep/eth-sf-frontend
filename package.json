@@ -14,10 +14,13 @@
     "@rainbow-me/rainbowkit": "^0.7.4",
     "@types/react-star-rating-component": "^1.4.1",
     "@xmtp/xmtp-js": "^7.0.1",
+    "chart.js": "^3.9.1",
     "ethers": "^5.0.0",
     "next": "^12.1.6",
     "react": "^18.1.0",
+    "react-chartjs-2": "^4.3.1",
     "react-dom": "^18.1.0",
+    "react-icons": "^4.6.0",
     "react-rating-stars-component": "^2.2.0",
     "react-star-rating-component": "^1.4.1",
     "wagmi": "^0.7.5"
