@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useState, useEffect } from 'react';
-import ReactStars from "react-rating-stars-component";
+import StarRatingComponent from 'react-star-rating-component';
 
 const ReviewForm = ({ onCloseModal, setOpenReview, setOpenReviewSuccess }: any) => {
 
@@ -53,11 +53,12 @@ const ReviewForm = ({ onCloseModal, setOpenReview, setOpenReviewSuccess }: any) 
 
               </div>
 
-              <ReactStars
-                count={5}
-                onChange={ratingChanged}
-                size={24}
-                activeColor="#ffd700"
+              <StarRatingComponent
+                starCount={5}
+                onStarClick={ratingChanged}
+                starColor="#ffd700"
+                name="rating"
+                value={rating}
               />
               <div className="mt-2">
                 <label htmlFor="review">Tell us your thoughts</label>
