@@ -5,6 +5,7 @@ import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/r
 import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
+import { NotificationsProvider } from '@mantine/notifications';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -43,7 +44,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                 accentColorForeground: 'white',
                 borderRadius: 'medium',
               })} coolMode>
+        <NotificationsProvider>
         <Component {...pageProps} />
+        </NotificationsProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );

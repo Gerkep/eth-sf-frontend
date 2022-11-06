@@ -3,11 +3,13 @@ import { useState } from 'react';
 import { Client } from '@xmtp/xmtp-js'
 import { useSigner } from 'wagmi';
 import { Wallet, ethers } from 'ethers'
+import { showNotification } from '@mantine/notifications';
 
 const Signin = ({onCloseModal}: any) => {
 
     const wallet = Wallet.createRandom();
     const [ens, setENS] = useState('');
+    const [givenAddress, setGivenAddress] = useState('');
     const {data: signer} = useSigner();
     const [loading, setLoading] = useState(false);
     const handleCloseClick = () => {
@@ -17,18 +19,36 @@ const Signin = ({onCloseModal}: any) => {
     const share = async (e: React.FormEvent<HTMLFormElement>) => {
         setLoading(true);
         e.preventDefault();
-        const provider = new ethers.providers.JsonRpcProvider("https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7");
-        var address = await provider.resolveName(ens);
-        if(signer && address){
-          const xmtp = await Client.create(signer)
-          const newConversation = await xmtp.conversations.newConversation(
-            address
-          )
-          console.log(`Saying GM to ${newConversation.peerAddress}`)
-          await newConversation.send('gmgm')
+        let address: string | null = null;
+        if(ens){
+          const provider = new ethers.providers.JsonRpcProvider("https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7");
+          address = await provider.resolveName(ens);
+        }else if(givenAddress){
+          address = givenAddress;
         }
-      
-        handleCloseClick();
+        if(signer && address){
+          try{
+            const xmtp = await Client.create(signer)
+            const newConversation = await xmtp.conversations.newConversation(
+              address
+            )
+            console.log(`Saying GM to ${newConversation.peerAddress}`)
+            await newConversation.send('gmgm')
+            handleCloseClick();
+          } catch(e) {
+            showNotification({
+              id: 'error',
+              disallowClose: true,
+              autoClose: 4000,
+              title: "Not an XMTP user",
+              message: 'The resolved address is not an XMTP user.',
+              color: 'red',
+              style: { 
+                  backgroundColor: "#ECECEC",
+              },
+          })
+          }
+        }
         setLoading(false);
     }
 
@@ -60,7 +80,19 @@ const Signin = ({onCloseModal}: any) => {
                     value={ens}
                     autoComplete="ens"
                     placeholder='gerke.eth'
-                    required
+                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    />
+                </div>
+                or
+                <div className="mt-1">
+                    <input
+                    id="address"
+                    name="address"
+                    type="string"
+                    onChange={(e) => setGivenAddress(e.target.value)}
+                    value={givenAddress}
+                    autoComplete="address"
+                    placeholder='0x....'
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     />
                 </div>
